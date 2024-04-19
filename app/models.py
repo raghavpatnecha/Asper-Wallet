@@ -9,6 +9,7 @@ class Wallet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     balance = db.Column(db.Float, nullable=False, default=0.0)
+    version = db.Column(db.Integer, default=0)  # Add a version column for optimistic locking
     user = db.relationship('User', backref=db.backref('wallets', lazy=True))
 
 
@@ -17,7 +18,7 @@ class WalletTransaction(db.Model):
     wallet_id = db.Column(db.Integer, db.ForeignKey('wallet.id'), nullable=False)
     amount = db.Column(db.Float, nullable=False)
     type = db.Column(db.String(20), nullable=False)  # 'credit' or 'debit'
-    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     wallet = db.relationship('Wallet', backref=db.backref('transactions', lazy=True))
 

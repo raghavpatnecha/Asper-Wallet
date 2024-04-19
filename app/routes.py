@@ -32,7 +32,7 @@ def api_credit_money():
 def api_debit_money():
     wallet_id = request.json.get('wallet_id')
     amount = request.json.get('amount')
-    minimum_balance = request.json.get('minimum_balance', 0)  # Optional minimum balance from request
+    minimum_balance = request.json.get('minimum_balance', 100)  # Optional minimum balance from request
     if not all([wallet_id, amount]):
         return jsonify(error="Wallet ID and amount are required"), 400
     try:
@@ -58,7 +58,7 @@ def api_transaction_history():
         return jsonify(error="Wallet ID is required"), 400
     try:
         history = transaction_history(wallet_id, start_date, end_date)
-        return jsonify(history=history), 200
+        return jsonify(history), 200
     except ValueError as e:
         return jsonify(error=str(e)), 400
 

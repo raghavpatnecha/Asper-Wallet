@@ -2,6 +2,7 @@ import os
 
 class Config:
     """Base configuration class with default settings."""
+    #commenting secret key for the sake of this assignment
     #SECRET_KEY = os.environ.get('SECRET_KEY', 'your_default_secret_key')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///wallet.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
