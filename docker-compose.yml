@@ -1,9 +1,12 @@
-version: '3'
+version: '3.8'
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: raghavpatnecha/asper-wallet-api:0.0.1.RELEASE
     ports:
       - "5000:5000"
     volumes:
-      - .:/app
+      - .:/usr/src/app
